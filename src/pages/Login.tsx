@@ -4,8 +4,10 @@ import { Button } from "antd";
 import { useAppDispatch } from "../redux/hook";
 import { setUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const navigate = useNavigate()
     const [login] = useLoginMutation();
     const dispatch = useAppDispatch();
     const { handleSubmit, register } = useForm({
@@ -20,6 +22,9 @@ const Login = () => {
         const user = verifyToken(response.data.accessToken);
         dispatch(setUser({ user, token: response.data.accessToken }));
         // console.log(object); 
+        if(response.success) {
+            navigate('/')
+        }
     };
     return (
         <div>
