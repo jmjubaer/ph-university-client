@@ -3,6 +3,8 @@ import sidebarItemsGenerator from "../../utils/sidebarItemsGenerator";
 import { adminPaths } from "../../routes/admin.routes";
 import { facultyPaths } from "../../routes/faculty.routes";
 import { studentPaths } from "../../routes/student.rotes";
+import { useAppSelector } from "../../redux/hook";
+import { selectCurrentUser } from "../../redux/features/auth/authSlice";
 
 const { Sider } = Layout;
 const userRole = {
@@ -11,19 +13,25 @@ const userRole = {
     FACULTY: "faculty",
 };
 const Sidebar = () => {
-    const role = "student";
+    const user = useAppSelector(selectCurrentUser);
     let sidebarItems;
-    switch (role) {
+    switch (user?.role) {
         case userRole.ADMIN:
             sidebarItems = sidebarItemsGenerator(adminPaths, userRole.ADMIN);
             break;
 
         case userRole.FACULTY:
-            sidebarItems = sidebarItemsGenerator(facultyPaths, userRole.FACULTY);
+            sidebarItems = sidebarItemsGenerator(
+                facultyPaths,
+                userRole.FACULTY
+            );
             break;
 
         case userRole.STUDENT:
-            sidebarItems = sidebarItemsGenerator(studentPaths, userRole.STUDENT);
+            sidebarItems = sidebarItemsGenerator(
+                studentPaths,
+                userRole.STUDENT
+            );
             break;
 
         default:
@@ -54,9 +62,10 @@ const Sidebar = () => {
             <Menu
                 theme='dark'
                 mode='inline'
-                defaultSelectedKeys={["4"]}
+                defaultSelectedKeys={["Dashboard"]}
                 items={sidebarItems}
             />
+            <div className=''></div>
         </Sider>
     );
 };
