@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useForm } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { Button } from "antd";
 import { useAppDispatch } from "../redux/hook";
@@ -7,18 +6,16 @@ import { setUser, TUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import PHForm from "../components/form/PHForm";
+import PHInput from "../components/form/PHInput";
+import { FieldValues } from "react-hook-form";
 
 const Login = () => {
     const navigate = useNavigate();
     const [login] = useLoginMutation();
     const dispatch = useAppDispatch();
-    const { handleSubmit, register } = useForm({
-        defaultValues: {
-            id: "A-0001",
-            password: "admin123",
-        },
-    });
-    const handleLogin = async (data: { id: string; password: string }) => {
+
+    const onSubmit = async (data: FieldValues) => {
         try {
             const tostId = toast.loading("User is logging");
             const response = await login(data).unwrap();
@@ -35,16 +32,17 @@ const Login = () => {
             toast.error(error.message);
         }
     };
+    const defaultValues = {
+        id: "A-0001",
+        password: "admin123",
+    };
     return (
         <div>
-            <form onSubmit={handleSubmit(handleLogin)}>
-                <label htmlFor='username'>Id:</label>
-                <input type='text' id='username' {...register("id")} />
-
-                <label htmlFor='password'>Password:</label>
-                <input type='text' id='password' {...register("password")} />
+            <PHForm onSubmit={onSubmit} defaultValues={defaultValues}>
+                <PHInput type='text' label='Id:' name='id' />
+                <PHInput type='text' label='Password:' name='password' />
                 <Button htmlType='submit'>Login</Button>
-            </form>
+            </PHForm>
         </div>
     );
 };
