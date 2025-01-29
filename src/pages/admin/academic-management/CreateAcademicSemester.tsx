@@ -4,6 +4,8 @@ import { Button, Col, Flex } from "antd";
 import PHSelect from "../../../components/form/PHSelect";
 import { semesterOptions } from "../../../constant/semester";
 import { monthsOptions } from "../../../constant/global";
+import { academicSemesterSchema } from "../../../Schema/academicSemester.schema.";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const currentYear = new Date().getFullYear();
 const yearOptions = [0, 1, 2, 3, 4].map((number) => ({
@@ -26,7 +28,9 @@ const CreateAcademicSemester = () => {
     return (
         <Flex justify='center' align='center'>
             <Col span={6}>
-                <PHForm onSubmit={handleCreateAcademicSemester}>
+                <PHForm
+                    onSubmit={handleCreateAcademicSemester}
+                    resolver={zodResolver(academicSemesterSchema)}>
                     <PHSelect
                         name='name'
                         label={"Name"}
