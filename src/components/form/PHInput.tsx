@@ -8,7 +8,7 @@ type TInputProps = {
 };
 const PHInput = ({ name, type, label }: TInputProps) => {
     return (
-        <div>
+        <div style={{marginBottom: "20px"}}>
             {label && <label htmlFor={name}>{label}</label>}
             <Controller
                 name={name}

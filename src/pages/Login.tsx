@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useLoginMutation } from "../redux/features/auth/authApi";
-import { Button } from "antd";
+import { Button, Row } from "antd";
 import { useAppDispatch } from "../redux/hook";
 import { setUser, TUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
@@ -37,13 +37,13 @@ const Login = () => {
         password: "admin123",
     };
     return (
-        <div>
+        <Row justify='center' align='middle' style={{ height: "100vh" }}>
             <PHForm onSubmit={onSubmit} defaultValues={defaultValues}>
                 <PHInput type='text' label='Id:' name='id' />
                 <PHInput type='text' label='Password:' name='password' />
                 <Button htmlType='submit'>Login</Button>
             </PHForm>
-        </div>
+        </Row>
     );
 };
 
