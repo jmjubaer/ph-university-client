@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Col, Flex } from "antd";
 import PHForm from "../../../components/form/PHForm";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -6,8 +7,8 @@ import { academicFacultySchema } from "../../../Schema/academicSemester.schema."
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import PHInput from "../../../components/form/PHInput";
 import { useAddAcademicFacultyMutation } from "../../../redux/features/admin/academicFaculty.api";
-import { TAcademicFaculty } from "../../../types/academicSemester.type";
 import { TResponse } from "../../../types";
+import { TAcademicFaculty } from "../../../types/academicFaculty.type";
 
 const CreateAcademicFaculty = () => {
     const [CreateAcademicFaculty] = useAddAcademicFacultyMutation();

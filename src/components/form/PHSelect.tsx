@@ -3,7 +3,7 @@ import { Controller } from "react-hook-form";
 
 type TSelectProps = {
     name: string;
-    label: string;
+    label?: string;
     options: {
         value: string;
         label: string;
