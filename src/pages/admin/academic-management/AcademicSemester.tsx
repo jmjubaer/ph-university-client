@@ -10,7 +10,7 @@ type TTableDataType = Pick<
 
 const AcademicSemester = () => {
     const [params, setParams] = useState<TQueryParam[] | undefined>(undefined);
-    const { data: semesterData } = useGetAllSemestersQuery(params);
+    const { data: semesterData, isFetching } = useGetAllSemestersQuery(params);
     const tableData = semesterData?.data?.map(
         ({ _id, name, year, startMonth, endMonth }) => ({
             key: _id,
@@ -65,13 +65,13 @@ const AcademicSemester = () => {
             render: () => {
                 return (
                     <div>
-                        <Button type="primary">Update</Button>
+                        <Button type='primary'>Update</Button>
                         {/* <Button type="primary" danger>
                             Delete
                         </Button> */}
                     </div>
                 );
-            }
+            },
         },
     ];
 
@@ -93,6 +93,7 @@ const AcademicSemester = () => {
         <div>
             {" "}
             <Table<TTableDataType>
+                loading={isFetching}
                 columns={columns}
                 dataSource={tableData}
                 onChange={onChange}
