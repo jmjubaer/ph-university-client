@@ -1,16 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import PHForm from "../../../components/form/PHForm";
 import { Button } from "antd";
 import PHInput from "../../../components/form/PHInput";
-import { useGetAllAcademicFacultyQuery } from "../../../redux/features/admin/academicFaculty.api";
 import PHSelect from "../../../components/form/PHSelect";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { academicDepartmentSchema } from "../../../Schema/academicSemester.schema.";
 import { toast } from "sonner";
-import { useAddAcademicDepartmentMutation } from "../../../redux/features/admin/academicDepartment.apit";
 import { TResponse } from "../../../types";
 import { TAcademicDepartment } from "../../../types/academicDepartment.type";
 import { TAcademicFaculty } from "../../../types/academicFaculty.type";
+import { useAddAcademicDepartmentMutation, useGetAllAcademicFacultyQuery } from "../../../redux/features/admin/academicManagment.api";
 
 const CreateAcademicDepartment = () => {
     const { data: facultyData, isLoading: facultyLoading } =

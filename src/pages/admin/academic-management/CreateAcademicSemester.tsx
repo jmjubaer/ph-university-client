@@ -7,10 +7,10 @@ import { semesterOptions } from "../../../constant/semester";
 import { monthsOptions } from "../../../constant/global";
 import { academicSemesterSchema } from "../../../Schema/academicSemester.schema.";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAddSemesterMutation } from "../../../redux/features/admin/academicSemester.api";
 import { toast } from "sonner";
 import { TResponse } from "../../../types/global.type";
 import { TAcademicSemester } from "../../../types/academicSemester.type";
+import { useAddSemesterMutation } from "../../../redux/features/admin/academicManagment.api";
 
 const currentYear = new Date().getFullYear();
 const yearOptions = [0, 1, 2, 3, 4].map((number) => ({

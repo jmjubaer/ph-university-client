@@ -6,9 +6,9 @@ import { toast } from "sonner";
 import { academicFacultySchema } from "../../../Schema/academicSemester.schema.";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import PHInput from "../../../components/form/PHInput";
-import { useAddAcademicFacultyMutation } from "../../../redux/features/admin/academicFaculty.api";
 import { TResponse } from "../../../types";
 import { TAcademicFaculty } from "../../../types/academicFaculty.type";
+import { useAddAcademicFacultyMutation } from "../../../redux/features/admin/academicManagment.api";
 
 const CreateAcademicFaculty = () => {
     const [CreateAcademicFaculty] = useAddAcademicFacultyMutation();
