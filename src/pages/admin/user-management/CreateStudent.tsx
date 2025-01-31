@@ -1,7 +1,7 @@
-import { FieldValues, SubmitHandler } from "react-hook-form";
+import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import PHForm from "../../../components/form/PHForm";
 import PHInput from "../../../components/form/PHInput";
-import { Button, Col, Divider, Row } from "antd";
+import { Button, Col, Divider, Form, Input, Row } from "antd";
 import PHSelect from "../../../components/form/PHSelect";
 import { bloodGroupOptions, genderOptions } from "../../../constant/global";
 import PHDatePicker from "../../../components/form/PHDatePicker";
@@ -11,6 +11,9 @@ import {
 } from "../../../redux/features/admin/academicManagment.api";
 import { TAcademicSemester } from "../../../types/academicSemester.type";
 import { TAcademicDepartment } from "../../../types/academicDepartment.type";
+import { useAddStudentMutation } from "../../../redux/features/admin/userManagement.api";
+import { toast } from "sonner";
+import { TResponse } from "../../../types";
 
 const CreateStudent = () => {
     const studentData = {
@@ -25,8 +28,8 @@ const CreateStudent = () => {
             // dateOfBirth: "2002-05-15",
             bloodGroup: "O+",
 
-            email: "jmjubaerp3927@gmail.com",
-            contactNo: "+12324564945",
+            email: "jmjubaer39277@gmail.com",
+            contactNo: "+12324",
             emergencyContactNo: "+0987654321",
             presentAddress: "123 Main Street, Springfield",
             permanentAddress: "456 Elm Street, Springfield",
@@ -53,6 +56,7 @@ const CreateStudent = () => {
         useGetAllSemestersQuery(undefined);
     const { data: departmentData, isLoading: DLoading } =
         useGetAllAcademicDepartmentQuery(undefined);
+    const [CreateStudent] = useAddStudentMutation();
     const semesterOptions = semesterData?.data?.map(
         (data: TAcademicSemester) => ({
             key: data._id,
@@ -67,12 +71,29 @@ const CreateStudent = () => {
             label: data.name,
         })
     );
-    const handleCreateStudent: SubmitHandler<FieldValues> = (data) => {
+    const handleCreateStudent: SubmitHandler<FieldValues> = async (data) => {
         console.log(data);
-
-        //     const formData = new FormData();
-        //     formData.append("data", JSON.stringify(data));
-        //     console.log(Object.fromEntries(formData));
+        const toastId = toast.loading("Student creating .....");
+        try {
+            const studentData = {
+                password: "student123",
+                student: data,
+            };
+            const formData = new FormData();
+            formData.append("data", JSON.stringify(studentData));
+            formData.append("file", data.image);
+            const response = (await CreateStudent(
+                formData
+            )) as TResponse<TAcademicDepartment>;
+            console.log(response);
+            if (response?.error) {
+                toast.error(response?.error?.data?.message, { id: toastId });
+            } else {
+                toast.success("Student created successfully", { id: toastId });
+            }
+        } catch (error: any) {
+            toast.error(error?.message);
+        }
     };
     return (
         <div>
@@ -120,6 +141,26 @@ const CreateStudent = () => {
                         <PHDatePicker
                             label='Date of Birth:'
                             name='dateOfBirth'
+                        />
+                    </Col>
+                    <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+                        <Controller
+                            name='image'
+                            render={({
+                                field: { onChange, value, ...field },
+                            }) => (
+                                <Form.Item>
+                                    <Input
+                                        {...field}
+                                        type='file'
+                                        value={value?.fileName}
+                                        onChange={(e) =>
+                                            onChange(e?.target?.files?.[0])
+                                        }
+                                        accept='image/*'
+                                    />
+                                </Form.Item>
+                            )}
                         />
                     </Col>
                 </Row>
