@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import PHForm from "../../../components/form/PHForm";
-import { Button } from "antd";
+import { Button, Col, Flex } from "antd";
 import PHInput from "../../../components/form/PHInput";
 import PHSelect from "../../../components/form/PHSelect";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,7 +10,10 @@ import { toast } from "sonner";
 import { TResponse } from "../../../types";
 import { TAcademicDepartment } from "../../../types/academicDepartment.type";
 import { TAcademicFaculty } from "../../../types/academicFaculty.type";
-import { useAddAcademicDepartmentMutation, useGetAllAcademicFacultyQuery } from "../../../redux/features/admin/academicManagment.api";
+import {
+    useAddAcademicDepartmentMutation,
+    useGetAllAcademicFacultyQuery,
+} from "../../../redux/features/admin/academicManagment.api";
 
 const CreateAcademicDepartment = () => {
     const { data: facultyData, isLoading: facultyLoading } =
@@ -51,19 +54,21 @@ const CreateAcademicDepartment = () => {
         }
     );
     return (
-        <div>
-            <PHForm
-                onSubmit={handleCreateAcademicDepartment}
-                resolver={zodResolver(academicDepartmentSchema)}>
-                <PHInput name='name' type='text' label='Department Name' />
-                <PHSelect
-                    name='academicFaculty'
-                    options={facultyOptions}
-                    label='Select academic faculty'
-                />
-                <Button htmlType='submit'>Submit</Button>
-            </PHForm>
-        </div>
+        <Flex justify='center' align='center'>
+            <Col span={6}>
+                <PHForm
+                    onSubmit={handleCreateAcademicDepartment}
+                    resolver={zodResolver(academicDepartmentSchema)}>
+                    <PHInput name='name' type='text' label='Department Name' />
+                    <PHSelect
+                        name='academicFaculty'
+                        options={facultyOptions}
+                        label='Select academic faculty'
+                    />
+                    <Button htmlType='submit'>Submit</Button>
+                </PHForm>
+            </Col>
+        </Flex>
     );
 };
 
