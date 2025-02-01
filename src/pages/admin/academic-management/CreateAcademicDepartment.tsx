@@ -5,11 +5,9 @@ import { Button, Col, Flex } from "antd";
 import PHInput from "../../../components/form/PHInput";
 import PHSelect from "../../../components/form/PHSelect";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { academicDepartmentSchema } from "../../../Schema/academicSemester.schema.";
+import { academicDepartmentSchema } from "../../../Schema/academicManagement.schema.";
 import { toast } from "sonner";
-import { TResponse } from "../../../types";
-import { TAcademicDepartment } from "../../../types/academicDepartment.type";
-import { TAcademicFaculty } from "../../../types/academicFaculty.type";
+import { TAcademicDepartment, TAcademicFaculty, TResponse } from "../../../types";
 import {
     useAddAcademicDepartmentMutation,
     useGetAllAcademicFacultyQuery,

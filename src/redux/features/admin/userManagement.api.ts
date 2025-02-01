@@ -1,3 +1,4 @@
+import { TResponseRedux, TStudent } from "../../../types";
 import { baseApi } from "../../api/baseApi";
 
 const userManagementApi = baseApi.injectEndpoints({
@@ -6,6 +7,10 @@ const userManagementApi = baseApi.injectEndpoints({
             query: () => ({
                 url: "/students",
                 method: "GET",
+            }),
+            transformResponse: (response: TResponseRedux<TStudent[]>) => ({
+                data: response.data,
+                meta: response.meta,
             }),
         }),
         addStudent: builder.mutation({

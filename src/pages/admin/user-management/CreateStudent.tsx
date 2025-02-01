@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import PHForm from "../../../components/form/PHForm";
 import PHInput from "../../../components/form/PHInput";
@@ -9,11 +10,9 @@ import {
     useGetAllAcademicDepartmentQuery,
     useGetAllSemestersQuery,
 } from "../../../redux/features/admin/academicManagment.api";
-import { TAcademicSemester } from "../../../types/academicSemester.type";
-import { TAcademicDepartment } from "../../../types/academicDepartment.type";
 import { useAddStudentMutation } from "../../../redux/features/admin/userManagement.api";
 import { toast } from "sonner";
-import { TResponse } from "../../../types";
+import { TAcademicDepartment, TAcademicSemester, TResponse } from "../../../types";
 
 const CreateStudent = () => {
     const studentData = {

@@ -3,11 +3,10 @@ import { Button, Col, Flex } from "antd";
 import PHForm from "../../../components/form/PHForm";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { academicFacultySchema } from "../../../Schema/academicSemester.schema.";
+import { academicFacultySchema } from "../../../Schema/academicManagement.schema.";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import PHInput from "../../../components/form/PHInput";
-import { TResponse } from "../../../types";
-import { TAcademicFaculty } from "../../../types/academicFaculty.type";
+import { TAcademicFaculty, TResponse } from "../../../types";
 import { useAddAcademicFacultyMutation } from "../../../redux/features/admin/academicManagment.api";
 
 const CreateAcademicFaculty = () => {

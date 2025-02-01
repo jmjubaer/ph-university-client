@@ -5,12 +5,12 @@ import { Button, Col, Flex } from "antd";
 import PHSelect from "../../../components/form/PHSelect";
 import { semesterOptions } from "../../../constant/semester";
 import { monthsOptions } from "../../../constant/global";
-import { academicSemesterSchema } from "../../../Schema/academicSemester.schema.";
+import { academicSemesterSchema } from "../../../Schema/academicManagement.schema.";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { TResponse } from "../../../types/global.type";
-import { TAcademicSemester } from "../../../types/academicSemester.type";
 import { useAddSemesterMutation } from "../../../redux/features/admin/academicManagment.api";
+import { TAcademicSemester } from "../../../types";
 
 const currentYear = new Date().getFullYear();
 const yearOptions = [0, 1, 2, 3, 4].map((number) => ({

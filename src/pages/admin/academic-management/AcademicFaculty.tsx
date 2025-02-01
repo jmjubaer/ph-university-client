@@ -1,6 +1,6 @@
 import { Button, Table, TableColumnsType } from "antd";
-import { TAcademicFaculty } from "../../../types/academicFaculty.type";
 import { useGetAllAcademicFacultyQuery } from "../../../redux/features/admin/academicManagment.api";
+import { TAcademicFaculty } from "../../../types";
 type TTableDataType = Pick<TAcademicFaculty, "name">;
 const AcademicFaculty = () => {
     const { data: facultyData, isFetching } =
