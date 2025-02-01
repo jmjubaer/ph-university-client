@@ -23,6 +23,12 @@ const userManagementApi = baseApi.injectEndpoints({
                 meta: response.meta,
             }),
         }),
+        getStudentById: builder.query({
+            query: (id) => ({
+                url: `/students/${id}`,
+                method: "GET",
+            }),
+        }),
         addStudent: builder.mutation({
             query: (user) => ({
                 url: "/users/create-student",
@@ -30,7 +36,18 @@ const userManagementApi = baseApi.injectEndpoints({
                 body: user,
             }),
         }),
+        updateUserStatus: builder.mutation({
+            query: ({ id, status }) => ({
+                url: `/users/change-status/${id}`,
+                method: "POST",
+                body: status,
+            }),
+        }),
     }),
 });
-export const { useGetAllStudentQuery, useAddStudentMutation } =
-    userManagementApi;
+export const {
+    useGetAllStudentQuery,
+    useAddStudentMutation,
+    useGetStudentByIdQuery,
+    useUpdateUserStatusMutation
+} = userManagementApi;

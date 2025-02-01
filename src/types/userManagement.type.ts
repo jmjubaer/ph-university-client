@@ -29,7 +29,11 @@ export type TStudent = {
     gender: "male" | "female" | "other";
     dateOfBirth?: Date;
     email: string;
-    user: string;
+    user: {
+        _id: string;
+        role: "student";
+        status: "blocked" | "in-progress";
+    };
     admissionSemester: string;
     academicDepartment: string;
     academicFaculty: string;
