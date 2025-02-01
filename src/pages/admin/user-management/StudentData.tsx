@@ -1,10 +1,16 @@
-import { Button, Space, Table, TableColumnsType } from "antd";
+import { Button, Pagination, Space, Table, TableColumnsType } from "antd";
 import { TStudent } from "../../../types";
 import { useGetAllStudentQuery } from "../../../redux/features/admin/userManagement.api";
+import { useState } from "react";
 type TTableDataType = Pick<TStudent, "fullName" | "email" | "id">;
 
 const StudentData = () => {
-    const { data: studentData, isFetching } = useGetAllStudentQuery(undefined);
+    const [page, setPage] = useState(1);
+    const { data: studentData, isFetching } = useGetAllStudentQuery([
+        { name: "page", value: page },
+        { name: "limit", value: 3 },
+        { name: "sort", value: "id" },
+    ]);
     const tableData = studentData?.data?.map(
         ({ _id, id, fullName, email }: TStudent) => ({
             key: _id,
@@ -49,6 +55,13 @@ const StudentData = () => {
                 columns={columns}
                 dataSource={tableData}
                 showSorterTooltip={{ target: "sorter-icon" }}
+                pagination={false}
+            />
+            <Pagination
+                onChange={(value) => setPage(value)}
+                total={studentData?.meta?.total}
+                pageSize={3}
+                current={page}
             />
         </div>
     );

@@ -65,6 +65,11 @@ export const adminPaths = [
                 element: <StudentData />,
             },
             {
+                name: "Students",
+                path: "students/:studentId",
+                element: <StudentData />,
+            },
+            {
                 name: "Create Admin",
                 path: "create-admin",
                 element: <CreateAdmin />,
