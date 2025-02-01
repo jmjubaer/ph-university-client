@@ -26,7 +26,11 @@ const Login = () => {
                 duration: 2000,
             });
             if (response.success) {
-                navigate(`/${user.role}/dashboard`);
+                navigate(
+                    `/${
+                        user.role === "supperAdmin" ? "admin" : user.role
+                    }/dashboard`
+                );
             }
         } catch (error: any) {
             toast.error(error.message);
