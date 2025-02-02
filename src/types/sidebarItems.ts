@@ -5,13 +5,13 @@ export type TAcc = {
     element: ReactNode;
 };
 export type TRoute = {
-    name: string;
+    name?: string;
     path?: string;
     element?: ReactNode;
     children?: TRoute[];
 };
 export type TSidebarItem = {
-    key: string;
+    key: string | number;
     label: ReactNode;
     children?: TSidebarItem[];
-} | undefined;
+} ;
