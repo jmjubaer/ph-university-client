@@ -5,6 +5,11 @@ import CreateAcademicDepartment from "../pages/admin/academic-management/CreateA
 import CreateAcademicFaculty from "../pages/admin/academic-management/CreateAcademicFaculty";
 import CreateAcademicSemester from "../pages/admin/academic-management/CreateAcademicSemester";
 import AdminDashboard from "../pages/admin/AdminDashboard";
+import Courses from "../pages/admin/courseManagement/Courses";
+import CreateCourse from "../pages/admin/courseManagement/CreateCourse";
+import OfferCourse from "../pages/admin/courseManagement/OfferCourse";
+import RegisteredSemester from "../pages/admin/courseManagement/RegisteredSemester";
+import SemesterRegistration from "../pages/admin/courseManagement/SemesterRegistration";
 import AdminData from "../pages/admin/user-management/AdminData";
 import CreateAdmin from "../pages/admin/user-management/CreateAdmin";
 import CreateFaculty from "../pages/admin/user-management/CreateFaculty";
@@ -90,6 +95,41 @@ export const adminPaths = [
                 name: "Admins",
                 path: "admins",
                 element: <AdminData />,
+            },
+        ],
+    },
+    {
+        name: "Course Management",
+        children: [
+            {
+                name: "Semester Registration",
+                path: "semester-registration",
+                element: <SemesterRegistration />,
+            },
+            {
+                name: "Registered Semester",
+                path: "registered-semester",
+                element: <RegisteredSemester />,
+            },
+            {
+                name: "Create Course",
+                path: "create-course",
+                element: <CreateCourse />,
+            },
+            {
+                name: " Courses",
+                path: "courses",
+                element: <Courses />,
+            },
+            {
+                name: " Offer Course",
+                path: "offer-course",
+                element: <OfferCourse />,
+            },
+            {
+                name: "Offered Courses",
+                path: "offered-courses",
+                element: <OfferCourse />,
             },
         ],
     },
