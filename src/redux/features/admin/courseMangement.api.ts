@@ -3,7 +3,7 @@ import { baseApi } from "../../api/baseApi";
 
 const courseManagementApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        getAllCourses: builder.query({
+        getAllRegisteredSemester: builder.query({
             query: (args) => {
                 const params = new URLSearchParams();
                 if (args) {
@@ -12,13 +12,23 @@ const courseManagementApi = baseApi.injectEndpoints({
                     });
                 }
                 return {
-                    url: "/courses",
+                    url: "/semester-registration",
                     method: "GET",
                     params,
                 };
             },
         }),
+        addSemesterRegistration: builder.mutation({
+            query: (semester) => ({
+                url: "/semester-registration/create-semester-registration",
+                method: "POST",
+                body: semester,
+            }),
+        }),
     }),
 });
 
-export const { useGetAllCoursesQuery } = courseManagementApi;
+export const {
+    useGetAllRegisteredSemesterQuery,
+    useAddSemesterRegistrationMutation,
+} = courseManagementApi;
