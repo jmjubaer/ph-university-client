@@ -24,6 +24,7 @@ const userManagementApi = baseApi.injectEndpoints({
                     params,
                 };
             },
+            providesTags: ["student"],
             transformResponse: (response: TResponseRedux<TStudent[]>) => ({
                 data: response.data,
                 meta: response.meta,
@@ -41,12 +42,14 @@ const userManagementApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: user,
             }),
+            invalidatesTags: ["student"]
         }),
         updateUserStatus: builder.mutation({
             query: ({ id, status }) => ({
                 url: `/users/change-status/${id}`,
                 method: "POST",
                 body: status,
+                invalidatesTags: ["student"]
             }),
         }),
         getAllFaculty: builder.query({
@@ -64,6 +67,7 @@ const userManagementApi = baseApi.injectEndpoints({
                     params,
                 };
             },
+            providesTags: ["faculty"],
             transformResponse: (response: TResponseRedux<TFaculty[]>) => ({
                 data: response.data,
                 meta: response.meta,
@@ -81,6 +85,7 @@ const userManagementApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: user,
             }),
+            invalidatesTags: ["faculty"]
         }),
 
         getAllAdmin: builder.query({
@@ -98,6 +103,7 @@ const userManagementApi = baseApi.injectEndpoints({
                     params,
                 };
             },
+            providesTags: ["admin"],
             transformResponse: (response: TResponseRedux<TAdmin[]>) => ({
                 data: response.data,
                 meta: response.meta,
@@ -115,6 +121,7 @@ const userManagementApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: user,
             }),
+            invalidatesTags: ["admin"]
         }),
     }),
 });

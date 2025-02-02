@@ -17,6 +17,7 @@ const courseManagementApi = baseApi.injectEndpoints({
                     params,
                 };
             },
+            providesTags: ["semester-registration"],
         }),
         addSemesterRegistration: builder.mutation({
             query: (semester) => ({
@@ -24,6 +25,15 @@ const courseManagementApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: semester,
             }),
+            invalidatesTags: ["semester-registration"],
+        }),
+        changeRegisteredSemesterStatus: builder.mutation({
+            query: ({ id, data }) => ({
+                url: `/semester-registration/${id}`,
+                method: "PATCH",
+                body: data,
+            }),
+            invalidatesTags: ["semester-registration"],
         }),
     }),
 });
@@ -31,4 +41,5 @@ const courseManagementApi = baseApi.injectEndpoints({
 export const {
     useGetAllRegisteredSemesterQuery,
     useAddSemesterRegistrationMutation,
+    useChangeRegisteredSemesterStatusMutation,
 } = courseManagementApi;

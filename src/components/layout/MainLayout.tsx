@@ -21,6 +21,7 @@ const MainLayout = () => {
                         display: "flex",
                         justifyContent: "end",
                         alignItems: "center",
+                        zIndex: "99",
                     }}>
                     <Button
                         onClick={() => handleLogout()}

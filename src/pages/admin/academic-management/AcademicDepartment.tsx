@@ -1,20 +1,15 @@
 import { Button, Table, TableColumnsType } from "antd";
-import { useGetAllAcademicDepartmentQuery, useGetAllAcademicFacultyQuery } from "../../../redux/features/admin/academicManagment.api";
-import { TAcademicDepartment, TAcademicFaculty } from "../../../types";
+import { useGetAllAcademicDepartmentQuery } from "../../../redux/features/admin/academicManagment.api";
+import { TAcademicDepartment } from "../../../types";
 type TTableDataType = Pick<TAcademicDepartment, "name" | "academicFaculty">;
 const AcademicDepartment = () => {
-    const { data: facultyData, isLoading: facultyLoading } =
-        useGetAllAcademicFacultyQuery(undefined);
     const { data: departmentDate, isFetching } =
         useGetAllAcademicDepartmentQuery(undefined);
     const tableData = departmentDate?.data?.map(
         ({ _id, name, academicFaculty }: TAcademicDepartment) => ({
             key: _id,
             name,
-            academicFaculty: facultyData?.data?.find(
-                (faculty: TAcademicFaculty) =>
-                    faculty._id === academicFaculty?._id
-            )?.name,
+            academicFaculty: academicFaculty?.name,
         })
     );
     console.log(departmentDate);
@@ -47,7 +42,7 @@ const AcademicDepartment = () => {
         <div>
             {" "}
             <Table<TTableDataType>
-                loading={isFetching || facultyLoading}
+                loading={isFetching}
                 columns={columns}
                 dataSource={tableData}
                 showSorterTooltip={{ target: "sorter-icon" }}
