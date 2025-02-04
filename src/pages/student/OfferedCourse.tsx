@@ -1,5 +1,5 @@
 
-const OfferedCourse = () => {
+const   OfferedCourse = () => {
     return (
         <div>
             
