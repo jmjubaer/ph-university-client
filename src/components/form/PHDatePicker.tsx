@@ -12,7 +12,11 @@ const PHDatePicker = ({ name, label }: TInputProps) => {
                 name={name}
                 render={({ field, fieldState: { error } }) => (
                     <Form.Item label={label}>
-                        <DatePicker {...field} style={{width: "100%"}}/>
+                        <DatePicker
+                            {...field}
+                            style={{ width: "100%" }}
+                            
+                        />
                         {error && (
                             <small style={{ color: "red" }}>
                                 {error.message}

@@ -12,7 +12,11 @@ export const Months = [
     "November",
     "December",
 ];
-
+export const Days = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
+export const daysOptions = Days.map(day => ({
+    label: day,
+    value: day,
+}))
 export const bloodGroup = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 export const gender = ["male", "female", "other"];
 
