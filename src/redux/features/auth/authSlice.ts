@@ -20,7 +20,6 @@ const authSlice = createSlice({
     reducers: {
         setUser: (state, action) => {
             const { user, token } = action.payload;
-            console.log(user);
             state.user = {
                 role: user.role === "supperAdmin" ? "admin" : user.role,
                 exp: user.exp,

@@ -19,6 +19,7 @@ import {
 import PHSelect from "../../../components/form/PHSelect";
 import { daysOptions } from "../../../constant/global";
 import { TAcademicDepartment, TResponse } from "../../../types";
+import PHTimePicker from "../../../components/form/PHTimePicker";
 
 const OfferCourse = () => {
     const [courseId, setCourseId] = useState(undefined);
@@ -144,8 +145,9 @@ const OfferCourse = () => {
                         options={daysOptions}
                         label='Select day'
                     />
-                    <PHInput name='startTime' type='time' label='Start Time' />
-                    <PHInput name='endTime' type='time' label='End Time' />
+
+                    <PHTimePicker name='startTime' label='Start Time' />
+                    <PHTimePicker name='endTime' label='End Time' />
                     <Button htmlType='submit'>Submit</Button>
                 </PHForm>
             </Col>
