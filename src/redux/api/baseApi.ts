@@ -34,7 +34,12 @@ const baseQueryWithRefreshToken: BaseQueryFn<
     DefinitionType
 > = async (args, api, extraOptions): Promise<any> => {
     let result = (await baseQuery(args, api, extraOptions)) as TResponse;
+    console.log(result);
     if (result?.error && result?.error?.status === 404) {
+        toast.error(result?.error?.data?.message);
+    }
+    if (result?.error && result?.error?.status === 403) {
+        console.log(result?.error?.data?.message);
         toast.error(result?.error?.data?.message);
     }
     if (result?.error && result?.error?.status === 401) {
@@ -62,5 +67,13 @@ export const baseApi = createApi({
     reducerPath: "usersApi",
     baseQuery: baseQueryWithRefreshToken,
     endpoints: () => ({}),
-    tagTypes: ["semester", "student", "faculty", "admin", 'semester-registration', 'course','offer-course'],
+    tagTypes: [
+        "semester",
+        "student",
+        "faculty",
+        "admin",
+        "semester-registration",
+        "course",
+        "offer-course",
+    ],
 });

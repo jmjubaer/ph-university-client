@@ -16,8 +16,8 @@ const Login = () => {
     const dispatch = useAppDispatch();
 
     const onSubmit = async (data: FieldValues) => {
+        const tostId = toast.loading("User is logging");
         try {
-            const tostId = toast.loading("User is logging");
             const response = await login(data).unwrap();
             const user = verifyToken(response.data.accessToken) as TUser;
             dispatch(setUser({ user, token: response.data.accessToken }));
@@ -25,20 +25,30 @@ const Login = () => {
                 id: tostId,
                 duration: 2000,
             });
+            console.log(response);
             if (response.success) {
-                navigate(
-                    `/${
-                        user.role === "supperAdmin" ? "admin" : user.role
-                    }/dashboard`
-                );
+                if (response.data.needsPasswordChange) {
+                    navigate(`/change-password`);
+                    toast.success("Please reset your password", {
+                        id: tostId,
+                        duration: 2000,
+                    });
+                    return;
+                } else {
+                    navigate(
+                        `/${
+                            user.role === "supperAdmin" ? "admin" : user.role
+                        }/dashboard`
+                    );
+                }
             }
         } catch (error: any) {
-            toast.error(error.message);
+            toast.error(error.message, { id: tostId });
         }
     };
     const defaultValues = {
-        id: "A-0001",
-        password: "admin123",
+        id: "2025010001",
+        password: "student123",
     };
     return (
         <Row justify='center' align='middle' style={{ height: "100vh" }}>

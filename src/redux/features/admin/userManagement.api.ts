@@ -42,14 +42,14 @@ const userManagementApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: user,
             }),
-            invalidatesTags: ["student"]
+            invalidatesTags: ["student"],
         }),
         updateUserStatus: builder.mutation({
             query: ({ id, status }) => ({
                 url: `/users/change-status/${id}`,
                 method: "POST",
                 body: status,
-                invalidatesTags: ["student"]
+                invalidatesTags: ["student"],
             }),
         }),
         getAllFaculty: builder.query({
@@ -85,7 +85,7 @@ const userManagementApi = baseApi.injectEndpoints({
                 method: "POST",
                 body: user,
             }),
-            invalidatesTags: ["faculty"]
+            invalidatesTags: ["faculty"],
         }),
 
         getAllAdmin: builder.query({
@@ -117,11 +117,18 @@ const userManagementApi = baseApi.injectEndpoints({
         }),
         addAdmin: builder.mutation({
             query: (user) => ({
-                url: "users/create-admin",
+                url: "/users/create-admin",
                 method: "POST",
                 body: user,
             }),
-            invalidatesTags: ["admin"]
+            invalidatesTags: ["admin"],
+        }),
+        changePassword: builder.mutation({
+            query: (data) => ({
+                url: "/auth/change-password",
+                method: "POST",
+                body: data,
+            }),
         }),
     }),
 });
@@ -136,4 +143,5 @@ export const {
     useGetAllAdminQuery,
     useGetAdminByIdQuery,
     useAddAdminMutation,
+    useChangePasswordMutation,
 } = userManagementApi;
