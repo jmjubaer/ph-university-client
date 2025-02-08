@@ -14,8 +14,9 @@ const PHTimePicker = ({ name, label }: TInputProps) => {
                     <Form.Item label={label}>
                         <TimePicker
                             {...field}
+                            size="large"
                             style={{ width: "100%" }}
-                            format={"HH:mm"}
+                            format="HH:mm"
                         />
                         {error && (
                             <small style={{ color: "red" }}>

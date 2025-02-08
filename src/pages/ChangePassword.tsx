@@ -15,23 +15,19 @@ const ChangePassword = () => {
     const dispatch = useAppDispatch();
 
     const onSubmit = async (data: FieldValues) => {
+        const tostId = toast.loading("Changing....");
         try {
-            const tostId = toast.loading("Changing....");
-            try {
-                const response = await changePassword(data).unwrap();
-                console.log(response);
-                if (response.success) {
-                    navigate(`/login`);
-                    dispatch(logout());
-                    toast.success("Password change successfully. Login Now", {
-                        id: tostId,
-                    });
-                }
-            } catch (error: any) {
-                toast.error(error?.message);
+            const response = await changePassword(data).unwrap();
+            console.log(response);
+            if (response.success) {
+                navigate(`/login`);
+                dispatch(logout());
+                toast.success("Password change successfully. Login Now", {
+                    id: tostId,
+                });
             }
         } catch (error: any) {
-            toast.error(error.message);
+            toast.error(error?.message, { id: tostId });
         }
     };
     return (

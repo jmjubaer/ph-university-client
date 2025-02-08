@@ -20,6 +20,7 @@ import PHSelect from "../../../components/form/PHSelect";
 import { daysOptions } from "../../../constant/global";
 import { TAcademicDepartment, TResponse } from "../../../types";
 import PHTimePicker from "../../../components/form/PHTimePicker";
+import moment from "moment";
 
 const OfferCourse = () => {
     const [courseId, setCourseId] = useState(undefined);
@@ -76,11 +77,14 @@ const OfferCourse = () => {
 
     const handleOfferCourse: SubmitHandler<FieldValues> = async (data) => {
         const toastId = toast.loading("Creating ....");
+        console.log(data);
         try {
             const offerCourseData = {
                 ...data,
                 section: Number(data.section),
                 maxCapacity: Number(data.maxCapacity),
+                startTime: moment(new Date(data.startTime)).format("HH:MM"),
+                endTime: moment(new Date(data.endTime)).format("HH:MM"),
             };
             const response = (await OfferCourse(
                 offerCourseData
