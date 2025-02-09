@@ -24,17 +24,16 @@ const facultyCourseManagementApi = baseApi.injectEndpoints({
                 meta: response.meta,
             }),
         }),
-        enrollCourse: builder.mutation({
+        updateMarks: builder.mutation({
             query: (data) => ({
-                url: "/enrolled-courses/create-enrolled-course",
-                method: "POST",
+                url: "/enrolled-courses/update-enrolled-course-marks",
+                method: "PATCH",
                 body: data,
             }),
-            invalidatesTags: ["offered-course"],
         }),
     }),
     // Add other CRUD operations as needed for faculty course management (e.g., create, read, update, delete)
 });
 
-export const { useGetFacultyCourseQuery, useEnrollCourseMutation } =
+export const { useGetFacultyCourseQuery, useUpdateMarksMutation } =
     facultyCourseManagementApi;
