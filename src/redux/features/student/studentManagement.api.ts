@@ -25,6 +25,27 @@ const userManagementApi = baseApi.injectEndpoints({
                 meta: response.meta,
             }),
         }),
+        getMyEnrolledCourse: builder.query({
+            query: (args) => {
+                const params = new URLSearchParams();
+                if (args) {
+                    args.forEach((item: TQueryParam) => {
+                        params.append(item.name, item.value as string);
+                    });
+                }
+
+                return {
+                    url: "/enrolled-courses/my-enrolled-course",
+                    method: "GET",
+                    params,
+                };
+            },
+            providesTags: ["offered-course"],
+            transformResponse: (response: TResponseRedux<any>) => ({
+                data: response.data,
+                meta: response.meta,
+            }),
+        }),
         enrollCourse: builder.mutation({
             query: (data) => ({
                 url: "/enrolled-courses/create-enrolled-course",
@@ -35,4 +56,5 @@ const userManagementApi = baseApi.injectEndpoints({
         }),
     }),
 });
-export const { useGetMyOfferCourseQuery,useEnrollCourseMutation } = userManagementApi;
+export const { useGetMyOfferCourseQuery, useEnrollCourseMutation,useGetMyEnrolledCourseQuery } =
+    userManagementApi;
